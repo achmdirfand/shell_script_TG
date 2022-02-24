@@ -1,0 +1,37 @@
+USE GRAPH EntityRes
+BEGIN
+CREATE LOADING JOB load_job_video_csv FOR GRAPH EntityRes {
+      DEFINE FILENAME file1="/home/tigergraph/tigergraph/data/gui/loading_data/video.csv";
+      LOAD file1 TO VERTEX Video VALUES($0, $1, $2, $3) USING SEPARATOR=",", HEADER="true", EOL="\n";
+    }
+
+CREATE LOADING JOB load_job_video_genre_csv FOR GRAPH EntityRes {
+      DEFINE FILENAME file2="/home/tigergraph/tigergraph/data/gui/loading_data/video_genre.csv";
+      LOAD file2 TO EDGE Has_Genre VALUES($1, $0) USING SEPARATOR=",", HEADER="true", EOL="\n";
+    }
+
+CREATE LOADING JOB load_job_video_keyword_csv FOR GRAPH EntityRes {
+      DEFINE FILENAME file3="/home/tigergraph/tigergraph/data/gui/loading_data/video_keyword.csv";
+      LOAD file3 TO EDGE Has_Keyword VALUES($1, $0) USING SEPARATOR=",", HEADER="true", EOL="\n";
+    }
+
+CREATE LOADING JOB load_job_video_play_csv FOR GRAPH EntityRes {
+      DEFINE FILENAME file4="/home/tigergraph/tigergraph/data/gui/loading_data/video_play.csv";
+      LOAD file4 TO VERTEX Video_Play_Event VALUES($0, $3, $4) USING SEPARATOR=",", HEADER="true", EOL="\n";
+      LOAD file4 TO VERTEX Account VALUES($1, _, _, _, _, _) USING SEPARATOR=",", HEADER="true", EOL="\n";
+      LOAD file4 TO VERTEX Video VALUES($2, _, _, _) USING SEPARATOR=",", HEADER="true", EOL="\n";
+      LOAD file4 TO EDGE Has_Play_Event VALUES($1, $0) USING SEPARATOR=",", HEADER="true", EOL="\n";
+      LOAD file4 TO EDGE Play_Video VALUES($0, $2) USING SEPARATOR=",", HEADER="true", EOL="\n";
+    }
+
+CREATE LOADING JOB load_job_entity_csv FOR GRAPH EntityRes {
+      DEFINE FILENAME file5="/home/tigergraph/tigergraph/data/gui/loading_data/entity.csv";
+      LOAD file5 TO VERTEX Last_Name VALUES($2, $2) USING SEPARATOR=",", HEADER="true", EOL="\n";
+      LOAD file5 TO VERTEX Address VALUES($10, $10) USING SEPARATOR=",", HEADER="true", EOL="\n";
+      LOAD file5 TO EDGE Has_Email VALUES($0, $3) USING SEPARATOR=",", HEADER="true", EOL="\n";
+      LOAD file5 TO EDGE Has_IP VALUES($0, $5) USING SEPARATOR=",", HEADER="true", EOL="\n";
+      LOAD file5 TO EDGE Has_Last_Name VALUES($0, $2) USING SEPARATOR=",", HEADER="true", EOL="\n";
+      LOAD file5 TO EDGE Has_Phone VALUES($0, $7) USING SEPARATOR=",", HEADER="true", EOL="\n";
+      LOAD file5 TO EDGE Has_Address VALUES($0, $10) USING SEPARATOR=",", HEADER="true", EOL="\n";
+      LOAD file5 TO EDGE Has_Device VALUES($0, $9) USING SEPARATOR=",", HEADER="true", EOL="\n";
+    }
