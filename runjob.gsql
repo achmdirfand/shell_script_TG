@@ -1,0 +1,21 @@
+USE GRAPH EntityRes
+
+RUN LOADING JOB load_job_video_csv USING 
+file1="/home/tigergraph/tigergraph/data/gui/loading_data/video.csv"
+
+RUN LOADING JOB load_job_video_genre_csv  USING 
+file2="/home/tigergraph/tigergraph/data/gui/loading_data/video_genre.csv"
+
+RUN LOADING JOB load_job_video_keyword_csv USING 
+file3="/home/tigergraph/tigergraph/data/gui/loading_data/video_keyword.csv"
+
+RUN LOADING JOB load_job_video_play_csv  USING 
+file4="/home/tigergraph/tigergraph/data/gui/loading_data/video_play.csv"
+
+RUN LOADING JOB  load_job_entity_csv USING 
+file5="/home/tigergraph/tigergraph/data/gui/loading_data/entity.csv"
+
+
+
+
+
